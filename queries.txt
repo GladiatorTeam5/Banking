@@ -1,0 +1,107 @@
+create table requests(
+reqid number(30) not null primary key,
+fname varchar(30),
+mname varchar(30),
+lname varchar(30),
+fa_name varchar(30),
+gender varchar(30),
+mob number(30),
+email varchar(30)
+aadhar number(30),
+dob date,
+raddress varchar(30),
+paddress varchar(30),
+o_type varchar(30)
+o_src varchar(30),
+o_inc number(30)
+opt_netbank varchar(1),
+iagree varchar(1),
+approve varchar(1)
+)
+
+
+insert into requests values
+
+
+
+
+---------------------------------------------accounts---------
+create table accounts(
+accno number(30) not null primary key,
+reqid number(30),
+fname varchar(30),
+mname varchar(30),
+lname varchar(30),
+fa_name varchar(30),
+gender varchar(30),
+mob number(30),
+email varchar(40),
+aadhar number(30),
+dob date,
+raddress varchar(30),
+paddress varchar(30),
+o_type varchar(30),
+o_src varchar(30),
+o_inc number(30),
+opt_netbank varchar(1), 
+iagree varchar(1),
+approve varchar(1),
+status varchar(1),
+balance number(30) default 10000
+)
+
+
+---------------------------------------transactions-----------
+create table transactions(
+tid number(30) not null primary key,
+tmode varchar(30),
+baccno number(30),
+amt number(30),
+accno number(30) references accounts(accno) ,
+dot date,
+mat_inst varchar(30),
+remark varchar(30),
+ttype varchar(1)
+
+);
+
+create table beneficiary(
+baccno number(30) not null primary key,
+bname`varchar(30),
+bnickname varchar(30),
+accno number(30) references accounts(accno)
+);
+
+
+
+create table netbanking(
+accno number(30) references accounts(accno),
+custid number(30) not null primary key,
+lpwd varchar(30),
+tpwd varchar(30)
+);
+
+
+
+================================
+syntax of autogen
+CREATE TABLE departments (
+  ID           NUMBER(10)    NOT NULL,
+  DESCRIPTION  VARCHAR2(50)  NOT NULL);
+
+ALTER TABLE departments ADD (
+  CONSTRAINT dept_pk PRIMARY KEY (ID));
+
+CREATE SEQUENCE dept_seq START WITH 1;
+Trigger definition:
+
+CREATE OR REPLACE TRIGGER dept_bir 
+BEFORE INSERT ON departments 
+FOR EACH ROW
+
+BEGIN
+  SELECT dept_seq.NEXTVAL
+  INTO   :new.id
+  FROM   dual;
+END;
+/
