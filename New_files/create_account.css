@@ -1,0 +1,11 @@
+.account{
+	margin-top: 30px;
+}
+.required:after {
+    content: " *";
+    color: red;
+}
+.aadhar{padding-top: 10px,
+	
+}
+
